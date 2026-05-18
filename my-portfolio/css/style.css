@@ -27,13 +27,26 @@ body.a {
     /* 2. 和紙のザラザラした質感を出すための極小ドットパターン */
     radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 0),
     /* 3. 一番後ろに敷くメインの背景画像（1920x1080前後の高解像度画像を推奨） */
-    url('../images/京都.png') !important; /* スラッシュ記述に統一 */
+    url('../images/富士山.png') !important; /* スラッシュ記述に統一 */
 
   /* 2番目のドットパターンのサイズ（細かさ） */
   background-size: auto, 4px 4px, cover !important; 
   background-position: center center, top left, center center !important;
   background-repeat: no-repeat, repeat, no-repeat !important;
   background-attachment: fixed !important; /* スクロールしても背景を動かさない */
+}
+
+body.blog-page {
+    background-image: 
+        /* 文字を読みやすくするための黒い半透明レイヤー（30%〜45%の薄さで画像をクッキリ見せる） */
+        linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.45)),
+        /* 一番後ろに敷くメインの背景画像（推奨サイズ: 1920x1080） */
+        url('../images/桜.png') !important; 
+
+    background-size: cover;          /* 画像を画面全体に綺麗にフィットさせる */
+    background-position: center;     /* 画像の中心を画面の中央に合わせる */
+    background-repeat: no-repeat;    /* 画像を繰り返さない */
+    background-attachment: fixed;    /* スクロールしても背景を動かさない（高級感UP） */
 }
 
 /* Worksページ全体の背景画像を一番後ろに敷く設定 */
