@@ -27,7 +27,7 @@ body.a {
     /* 2. 和紙のザラザラした質感を出すための極小ドットパターン */
     radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 0),
     /* 3. 一番後ろに敷くメインの背景画像（1920x1080前後の高解像度画像を推奨） */
-    url('C:/Users/katokoki/Downloads/a.jpg') !important; /* スラッシュ記述に統一 */
+    url('../images/京都.png') !important; /* スラッシュ記述に統一 */
 
   /* 2番目のドットパターンのサイズ（細かさ） */
   background-size: auto, 4px 4px, cover !important; 
@@ -43,7 +43,7 @@ body.works-page {
         /* 1. 黒い膜を少し薄くして、後ろの画像（京都.png）がクッキリ強く見えるように調整 */
         linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.45)),
         /* 2. 一番後ろに敷きたい画像を指定 */
-        url('C:/Users/katokoki/Downloads/京都.png') !important;
+        url('../images/a.jpg') !important;
 
     background-size: cover;          /* 画像を画面全体に綺麗にフィットさせる */
     background-position: center;     /* 画像の中心を画面の中央に合わせる */
