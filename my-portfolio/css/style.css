@@ -1,0 +1,418 @@
+@charset "UTF-8";
+
+/* 共通部分
+------------------------------- */
+html {
+    font-size: 100%;
+}
+body {
+    margin: 0;
+    font-family:
+        "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN",
+        "Hiragino Sans", sans-serif;
+    line-height: 1.7;
+    color: #e0e0e0; 
+    background-image: 
+        radial-gradient(circle at 50% 30%, rgba(212, 175, 55, 0.08), transparent 60%),
+        linear-gradient(to bottom, #1c1c1c, #0d0d0d);
+    background-color: #0d0d0d;
+    background-attachment: fixed;
+}
+
+body.a {
+  /* ★ 変更：お好みの背景画像の上に、薄い黒の膜と、和紙のザラザラ感を擬似的に重ねる設定 */
+  background-image: 
+    /* 1. 文字を読みやすくするための薄い黒レイヤー */
+    linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.6)),
+    /* 2. 和紙のザラザラした質感を出すための極小ドットパターン */
+    radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 0),
+    /* 3. 一番後ろに敷くメインの背景画像（1920x1080前後の高解像度画像を推奨） */
+    url('C:/Users/katokoki/Downloads/a.jpg') !important; /* スラッシュ記述に統一 */
+
+  /* 2番目のドットパターンのサイズ（細かさ） */
+  background-size: auto, 4px 4px, cover !important; 
+  background-position: center center, top left, center center !important;
+  background-repeat: no-repeat, repeat, no-repeat !important;
+  background-attachment: fixed !important; /* スクロールしても背景を動かさない */
+}
+
+/* Worksページ全体の背景画像を一番後ろに敷く設定 */
+body.works-page {
+    /* グラデーションの背景を上書きして画像に変更します */
+    background-image: 
+        /* 1. 黒い膜を少し薄くして、後ろの画像（京都.png）がクッキリ強く見えるように調整 */
+        linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.45)),
+        /* 2. 一番後ろに敷きたい画像を指定 */
+        url('C:/Users/katokoki/Downloads/京都.png') !important;
+
+    background-size: cover;          /* 画像を画面全体に綺麗にフィットさせる */
+    background-position: center;     /* 画像の中心を画面の中央に合わせる */
+    background-repeat: no-repeat;    /* 画像を繰り返さない */
+    background-attachment: fixed;    /* 画面をスクロールしても背景画像は固定されて動かない */
+}
+
+a {
+    text-decoration: none;
+    color: #d4af37; /* ★ 変更：リンクを上品な「金（ゴールド）」に */
+    transition: color 0.3s;
+}
+a:hover {
+    text-decoration: underline;
+    color: #f0d060;
+}
+img {
+    max-width: 100%;
+}
+
+/* レイアウト */
+.wrapper {
+    max-width: 1120px;
+    margin: auto;
+    padding: 0 1.5rem;
+}
+.align-center {
+    text-align: center;
+}
+
+/* 見出し */
+.font-english {
+    font-family: "Philosopher", sans-serif;
+    font-weight: normal;
+}
+.page-title,
+.heading-large,
+.heading-medium {
+    font-size: 3rem;
+    text-align: center;
+    color: #f5f5f5; /* ★ 変更：黒背景で見えやすく */
+}
+.page-title {
+    margin-top: 2rem;
+    line-height: 1.4;
+    color: #fff;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+}
+.heading-large {
+    margin-bottom: 1rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* ボタン */
+.btn {
+    display: inline-block;
+    font-size: 1.25rem;
+    background-color: #bc002d; /* ★ 変更：ITっぽさから、和に映える「朱赤（ジャパンレッド）」に */
+    color: #fff;
+    border-radius: 4px;
+    padding: 0.75rem 2rem;
+    transition: 0.3s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+.btn:hover {
+    background-color: #9e0024;
+    text-decoration: none;
+    color: #fff;
+}
+
+/* --------背景（桜のアニメーション）--------*/
+
+body.home .sakura-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+/* 花びら画像（またはCSSで描く花びら） */
+.petal {
+  position: absolute;
+  top: -50px;
+  width: 24px;
+  height: 24px;
+  background: #ffb7c5; 
+  border-radius: 15px 0 15px 0; 
+  opacity: 0.8;
+  animation: fall linear infinite;
+  box-shadow: 0 0 8px rgba(255, 183, 197, 0.5);
+}
+
+/* 位置とスピード */
+.petal:nth-child(1) { left: 5%; animation-duration: 8s; animation-delay: 0s; }
+.petal:nth-child(2) { left: 15%; animation-duration: 10s; animation-delay: 1s; }
+.petal:nth-child(3) { left: 25%; animation-duration: 7s; animation-delay: 2s; }
+.petal:nth-child(4) { left: 40%; animation-duration: 11s; animation-delay: 0.5s; }
+.petal:nth-child(5) { left: 55%; animation-duration: 9s; animation-delay: 1.5s; }
+.petal:nth-child(6) { left: 65%; animation-duration: 12s; animation-delay: 0s; }
+.petal:nth-child(7) { left: 75%; animation-duration: 8s; animation-delay: 2s; }
+.petal:nth-child(8) { left: 90%; animation-duration: 10s; animation-delay: 1s; }
+
+/* 落下アニメーション */
+@keyframes fall {
+  0% {
+    transform: translateY(-10px) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.9;
+  }
+  50% {
+    transform: translateY(50vh) translateX(30px) rotate(180deg);
+  }
+  100% {
+    transform: translateY(110vh) translateX(-20px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* ヘッダー
+------------------------------- */
+.page-header {
+    padding-top: 1rem;
+}
+.logo-text {
+    font-size: 2rem;
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+.logo-text:hover {
+    text-decoration: none;
+    color: #d4af37;
+}
+.main-nav {
+    display: flex;
+    justify-content: center;
+    gap: 2.5rem;
+    font-size: 1.25rem;
+    list-style: none;
+}
+.main-nav a {
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+.main-nav a:hover {
+    color: #d4af37;
+    text-decoration: none;
+}
+
+/* ヘッダーカバー画像
+------------------------------- */
+.cover {
+    background-color: #1a1a1a; 
+    background-size: cover;
+    background-position: center;
+    height: 600px;
+    border-bottom: 2px solid #d4af37; 
+}
+.sub-cover {
+    background-color: #262626; 
+    background-size: cover;
+    background-position: center;
+    height: 350px;
+    margin-bottom: 4rem;
+    border-bottom: 2px solid #d4af37;
+}
+
+/* HOME (index)
+------------------------------- */
+.about {
+    max-width: 800px;
+    padding: 0 1.5rem;
+    margin: 4rem auto 4rem;
+}
+.about p {
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+}
+
+/* BLOG (blog.html)
+------------------------------- */
+.post {
+    margin-bottom: 3rem;
+}
+.post-title {
+    font-weight: bold;
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+    color: #fff;
+}
+.post-info {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    align-items: center;
+}
+.post-cat {
+    display: flex;
+    gap: 0.5rem;
+    list-style: none;
+}
+.post-cat a {
+    color: #ccc;
+    background-color: #262626; 
+    border-radius: 4px;
+    font-size: 0.875rem;
+    padding: 0.25rem 0.75rem;
+}
+.post-cat a:hover {
+    background-color: #333;
+    color: #d4af37;
+    text-decoration: none;
+}
+.post-date {
+    color: #aaa;
+    font-size: 0.875rem;
+}
+.post-thumbnail {
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    border: 1px solid #333;
+}
+.post p {
+    margin-bottom: 1.5rem;
+    line-height: 1.8;
+}
+
+/* サイドバー */
+.side-menu {
+    list-style: none;
+    margin-bottom: 3rem;
+}
+.side-menu li {
+    border-bottom: 1px solid #262626;
+}
+.side-menu a {
+    color: #ccc;
+    display: block;
+    padding: 0.75rem 0;
+}
+.side-menu a:hover {
+    color: #d4af37;
+    padding-left: 0.5rem;
+    transition: padding 0.3s;
+}
+
+/* WORKS (works.html)
+------------------------------- */
+.grid {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(2, 1fr);
+    margin-bottom: 4rem;
+}
+.item {
+    /* ★ 変更：カード背景自体に暗いグラデーションレイヤーを敷き詰め、強い背景から文字を独立させます */
+    background-color: #1a1a1a; 
+    background-image: linear-gradient(to top, rgba(0, 0, 0, 0.9) 30%, rgba(0, 0, 0, 0.4) 100%) !important;
+    border: 1px solid #d4af37; /* 金の枠線 */
+    border-radius: 8px;
+    padding: 1rem;
+    /* 背景画像を強くした分、カードの影も強くして立体感を出します */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7); 
+    transition: transform 0.2s, border-color 0.2s;
+}
+.item:hover {
+    transform: translateY(-5px);
+    border-color: #f0d060; /* ホバー時に明るい金に輝く */
+}
+.item img {
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    border: 1px solid #333;
+}
+/* カードの中のテキストを黒背景・画像背景でも確実に読める白・薄グレーに固定 */
+.item p {
+    font-size: 0.9rem;
+    color: #e0e0e0 !important;
+}
+.item strong {
+    color: #ffffff !important;
+    font-size: 1.1rem;
+}
+
+/* フッター
+------------------------------- */
+.page-footer {
+    background-color: #111; 
+    padding-top: 4rem;
+    border-top: 1px solid #262626;
+}
+.page-footer .heading-large {
+    font-size: 2rem;
+}
+.info {
+    width: 100%;
+    max-width: 500px;
+    margin: auto;
+    padding: 0 1.5rem;
+    border-spacing: 0;
+}
+.info th,
+.info td {
+    border-bottom: 1px solid #262626;
+}
+.info th {
+    text-align: left;
+    font-weight: bold;
+    padding: 1rem;
+    color: #aaa;
+    width: 30%;
+}
+.info td {
+    padding: 1rem 0;
+    color: #fff;
+}
+.copyright {
+    background-color: #050505; 
+    text-align: center;
+    padding: 1.5rem 0;
+    margin-top: 4rem;
+    color: #888;
+}
+
+/* デスクトップ版
+------------------------------- */
+@media (min-width: 800px) {
+    .page-title {
+        font-size: 4rem;
+    }
+    .heading-large {
+        font-size: 3rem;
+    }
+    .post-title {
+        font-size: 2.2rem;
+    }
+
+    .page-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .blog-contents {
+        display: flex;
+        justify-content: space-between;
+    }
+    .post {
+        width: 70%;
+    }
+    .sidebar {
+        width: 25%;
+    }
+    .sidebar .heading-medium {
+        text-align: left;
+        margin-bottom: 1rem;
+        border-bottom: 2px solid #d4af37; 
+        padding-bottom: 0.5rem;
+    }
+
+    .grid {
+        gap: 2.5rem;
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
